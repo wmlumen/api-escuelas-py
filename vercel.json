@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/establecimientos",
+      "dest": "/api/establecimientos.js"
+    },
+    {
+      "src": "/api/departamentos",
+      "dest": "/api/departamentos.js"
+    },
+    {
+      "src": "/",
+      "dest": "/api/establecimientos.js"
+    }
+  ]
+}
