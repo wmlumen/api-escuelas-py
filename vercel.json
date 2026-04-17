@@ -1,22 +1,57 @@
 {
   "version": 2,
+  "name": "api-escuelas-py",
+  "env": [],
   "functions": {
     "api/*.js": {
-      "maxDuration": 10
+      "maxDuration": 30,
+      "memory": 512
     }
   },
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
+      "src": "/api/anos",
+      "dest": "/api/anos.js",
+      "methods": ["GET", "OPTIONS"]
+    },
+    {
       "src": "/api/establecimientos",
-      "dest": "/api/establecimientos.js"
+      "dest": "/api/establecimientos.js",
+      "methods": ["GET", "OPTIONS"]
     },
     {
       "src": "/api/departamentos",
-      "dest": "/api/departamentos.js"
+      "dest": "/api/departamentos.js",
+      "methods": ["GET", "OPTIONS"]
     },
     {
       "src": "/",
-      "dest": "/api/establecimientos.js"
+      "dest": "/api/anos.js"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
+        },
+        {
+          "key": "X-API-Version",
+          "value": "1.0.0"
+        }
+      ]
     }
   ]
 }
